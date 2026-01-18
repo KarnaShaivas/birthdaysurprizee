@@ -163,6 +163,7 @@ body::after {
     bottom: 20px;
     right: 20px;
     opacity: 0.7;
+    display: none !important;
 }
 
 .music-toggle-btn:hover {
@@ -1691,6 +1692,7 @@ body::after {
 }
 
 .end-video-mute {
+    display: none;
     position: absolute;
     right: -14px;
     top: 50%;

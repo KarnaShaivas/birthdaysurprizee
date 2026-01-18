@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ A Special Surprise ✨</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;500;600&family=Satisfy&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Fireflies Container -->
+    <div id="fireflies"></div>
+
+    <!-- Global Back Button -->
+    <button id="navBack" class="nav-back hidden">←</button>
+    
+    <!-- Secret Letter Icon -->
+    <button id="letterIcon" class="letter-icon">✉️</button>
+    
+    <!-- Main Container -->
+    <div id="app">
+        <!-- Screen 1: Welcome -->
+        <section id="screen-welcome" class="screen active">
+            <div class="content-box">
+                <div class="typing-container">
+                    <p class="typing-text" id="welcome-text"></p>
+                </div>
+                <div class="input-section hidden" id="name-input-section">
+                    <input type="text" id="nameInput" placeholder="Type your name here..." class="glow-input">
+                    <button class="glow-btn" id="submitName">Continue ✨</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Screen 1b: Not Allowed (Name Mismatch) -->
+        <section id="screen-not-allowed" class="screen">
+            <div class="content-box">
+                <div class="typing-container">
+                    <p class="typing-text" id="not-allowed-text"></p>
+                </div>
+                <div class="button-group hidden" id="not-allowed-buttons">
+                    <button class="glow-btn" id="try-again">Try again</button>
+                    <button class="glow-btn no-btn" id="go-home">Go back</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Screen 2: Recognition -->
+        <section id="screen-recognition" class="screen">
+            <div class="content-box">
+                <div class="typing-container">
+                    <p class="typing-text" id="recognition-text"></p>
+                </div>
+                <div class="button-group hidden" id="recognition-buttons">
+                    <button class="glow-btn yes-btn" data-choice="yes">Aww, you know me so well 🥰💖</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Screen 3: Greeting -->
+        <section id="screen-greeting" class="screen">
+            <div class="content-box">
+                <div class="typing-container">
+                    <p class="typing-text" id="greeting-text"></p>
+                </div>
+                <div class="button-group hidden" id="greeting-buttons">
+                    <button class="glow-btn" data-choice="okay">Of course you can 💖</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Screen 4: Playful Tease -->
+        <section id="screen-tease" class="screen">
+            <div class="content-box wiggle">
+                <div class="typing-container">
+                    <p class="typing-text" id="tease-text"></p>
+                </div>
+                <div class="button-group hidden" id="tease-buttons">
+                    <button class="glow-btn" data-choice="continue">Okay fine... 😅</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Screen 5: Why Here -->
+        <section id="screen-why" class="screen">
+            <div class="content-box">
+                <div class="typing-container">
+                    <p class="typing-text" id="why-text"></p>
+                </div>
+                <div class="button-group choice-buttons hidden" id="why-buttons">
+                    <button class="glow-btn" data-choice="surprise">🌟 To see my brother's surprise</button>
+                    <button class="glow-btn" data-choice="you">🪞 To see you, dear</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Screen 6: Caught Lying -->
+        <section id="screen-caught" class="screen">
+            <div class="content-box">
+                <div class="typing-container">
+                    <p class="typing-text" id="caught-text"></p>
+                </div>
+                <div class="button-group hidden" id="caught-buttons">
+                    <button class="glow-btn" data-choice="continue">Continue ➡️</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Screen 7: Brother's Voice -->
+        <section id="screen-brother" class="screen">
+            <div class="content-box brother-box">
+                <div class="brother-avatar">👨‍💻</div>
+                <div class="typing-container">
+                    <p class="typing-text" id="brother-text"></p>
+                </div>
+                <div class="button-group hidden" id="brother-buttons">
+                    <button class="glow-btn yes-btn" data-choice="yes">I think your heart never lied 💖🎂</button>
+                    <button class="glow-btn no-btn" data-choice="no">Your heart is lying, dear 😔</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Screen 8: Birthday Wishes -->
+        <section id="screen-birthday" class="screen">
+            <div class="content-box celebration">
+                <div class="cake-emoji">🎂</div>
+                <div class="typing-container">
+                    <p class="typing-text" id="birthday-text"></p>
+                </div>
+                <div class="button-group hidden" id="birthday-buttons">
+                    <button class="glow-btn" data-choice="continue">Thank you 💖</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Screen 9: No Birthday Tease -->
+        <section id="screen-birthday-tease" class="screen">
+            <div class="content-box">
+                <div class="typing-container">
+                    <p class="typing-text" id="birthday-tease-text"></p>
+                </div>
+                <div class="button-group hidden" id="birthday-tease-buttons">
+                    <button class="glow-btn" data-choice="show">🎁 Okay, show me then</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Screen 10: Time Travel -->
+        <section id="screen-timetravel" class="screen">
+            <div class="content-box">
+                <div class="clock-emoji">🕰️</div>
+                <div class="typing-container">
+                    <p class="typing-text" id="timetravel-text"></p>
+                </div>
+                <div class="button-group hidden" id="timetravel-buttons">
+                    <button class="glow-btn yes-btn" data-choice="yes">Yes, I believe in magic ✨🌙</button>
+                    <button class="glow-btn no-btn" data-choice="no">Hmm, maybe not always 💭</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Screen 11: Time Travel Response -->
+        <section id="screen-timetravel-response" class="screen">
+            <div class="content-box">
+                <div class="typing-container">
+                    <p class="typing-text" id="timetravel-response-text"></p>
+                </div>
+                <div class="button-group hidden" id="timetravel-response-buttons">
+                    <button class="glow-btn" data-choice="enter">Enter Memories World 🌌</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Screen 12: Memories World -->
+        <section id="screen-memories" class="screen">
+            <div class="memories-world">
+                <h2 class="memories-title">🌌 Memories World 🌌</h2>
+                <p class="memories-subtitle">Pick any memory you feel like opening… no rules, only feelings 🌿✨</p>
+
+                <div class="portals-grid" role="list">
+                    <button class="portal-card" id="portal-puc" data-portal="puc" role="listitem" aria-label="PUC memories">
+                        <span class="portal-icon">🎒</span>
+                        <span class="portal-label">PUC Memories</span>
+                    </button>
+                    <button class="portal-card" id="portal-degree" data-portal="degree" role="listitem" aria-label="Degree memories">
+                        <span class="portal-icon">🎓</span>
+                        <span class="portal-label">Degree Life</span>
+                    </button>
+                    <button class="portal-card" id="portal-people" data-portal="people" role="listitem" aria-label="People you loved">
+                        <span class="portal-icon">👨‍👩‍👧‍👦</span>
+                        <span class="portal-label">People You Loved</span>
+                    </button>
+                    <button class="portal-card" id="portal-today" data-portal="today" role="listitem" aria-label="Today's you">
+                        <span class="portal-icon">🌟</span>
+                        <span class="portal-label">Today's You</span>
+                    </button>
+                </div>
+                
+                <div class="memories-continue-section">
+                    <button class="glow-btn" id="memories-continue-btn">Let's Dive Deeper 🌊✨</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Screen 13: Star Constellation (Memory Gallery) -->
+        <section id="screen-constellation" class="screen">
+            <div class="constellation-world">
+                <h2 class="constellation-title" id="constellation-title">🎒 PUC Memories</h2>
+                <div class="stars-container" id="stars-container">
+                    <!-- Stars will be dynamically generated -->
+                </div>
+                <p class="constellation-hint" id="constellation-hint">✨ Click on a star to reveal a memory ✨</p>
+                <div class="constellation-nav">
+                    <button class="back-btn" id="back-to-portals">← Back to Portals</button>
+                    <button class="back-btn next-btn" id="next-portal">Next →</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Screen 14: Photo Viewer -->
+        <div id="photo-modal" class="modal hidden">
+            <div class="modal-content">
+                <button class="close-modal">&times;</button>
+                <img id="modal-photo" src="" alt="Memory">
+                <p id="modal-message" class="modal-message"></p>
+            </div>
+        </div>
+
+        <!-- Screen 15: Heartfelt Note (Final message) -->
+        <section id="screen-heartfelt" class="screen">
+            <div class="heartfelt-card">
+                <div class="heartfelt-blooms">✨ 💖 🌟 🎂 🎉</div>
+                <div class="typing-container">
+                    <p class="typing-text heartfelt-text" id="heartfelt-text"></p>
+                </div>
+                <div class="button-group hidden" id="heartfelt-buttons">
+                    <button class="glow-btn heartfelt-btn" id="heartfelt-continue">Thank you, dear 💖</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Screen 15: Final Goodbye -->
+        <section id="screen-goodbye" class="screen">
+            <div class="content-box goodbye-box">
+                <div class="flower-decoration">✨💖🌟🎂🎉</div>
+                <div class="typing-container">
+                    <p class="typing-text" id="goodbye-text"></p>
+                </div>
+                <div class="button-group hidden" id="goodbye-buttons">
+                    <button class="glow-btn" data-choice="end">Thank you, dear 💖</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Screen 16: End Screen -->
+        <section id="screen-end" class="screen">
+            <div class="end-container">
+                <div class="end-hearts">💖💕💗💓💝</div>
+                <h1 class="end-title">Happy Birthday, Ammu Kutti! 🎂</h1>
+                <p class="end-message">May all your dreams come true ✨</p>
+                <div class="end-video-wrap">
+                    <video class="end-video" controls loop playsinline preload="metadata">
+                        <source src="assets/WhatsApp Video 2026-01-19 at 12.41.51 AM (online-video-cutter.com).mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <button class="end-video-mute" type="button" aria-label="Toggle video sound">🔇</button>
+                </div>
+                <audio id="endAudio" preload="auto">
+                    <source src="assets/Audio File.mp3" type="audio/mpeg">
+                </audio>
+                <p class="end-wishes">Wishing you endless smiles, love, and magical memories ✨💖</p>
+                <div class="end-signature">
+                    <p>With love,</p>
+                    <p class="signature-name">Karna 💞</p>
+                </div>
+                <button class="glow-btn restart-btn" id="restart">Start Again 🔄</button>
+            </div>
+        </section>
+        
+        <!-- Secret Letter Modal -->
+        <div id="letter-modal" class="modal hidden">
+            <div class="letter-modal-content">
+                <button class="close-modal close-letter">&times;</button>
+                <div id="password-section">
+                    <div class="typing-container letter-intro">
+                        <p class="typing-text" id="letter-intro-text"></p>
+                    </div>
+                    <h3>🔐 Enter the Password ✨</h3>
+                    <input type="password" id="letterPassword" placeholder="Password..." class="glow-input">
+                    <button class="glow-btn" id="submitPassword">Unlock ✉️💞</button>
+                    <p id="password-error" class="error-text hidden">Hmm… not this one 😌 Try again ✨</p>
+                </div>
+                <div id="letter-content" class="hidden">
+                    <div class="letter-actions">
+                        <button class="glow-btn no-btn" id="letter-back">← Back</button>
+                    </div>
+                    <div class="letter-paper">
+                        <h2 class="letter-heading">✉️ Private Letter for Ammu Kutti 💖</h2>
+                        <div class="letter-body">
+                            <p>Dear Ammu Kutti 🌸,</p>
+                            
+                            <p>First of all, thank you so much for giving your precious time ⏳💗 to read this little secret of mine. Before I open my heart completely, let me tell you a story… a story that never gives straight answers 😌✨</p>
+                            
+                            <p>Once upon a time, there were two ordinary college guys 👬 — not heroes, not special — just boys living a boring, predictable life 😴</p>
+                            
+                            <p>Then one day… something changed 🌟 A new presence entered their world — not loudly, not dramatically — but quietly, like a soft breeze that no one notices until everything feels different 🌬️</p>
+                            
+                            <p>For one of them, she was only a gentle crush 🌷 beautiful, yet too distant to touch. When problems came ⛈️, he chose to step back — not because the feeling ended, but because sometimes walking away is the bravest form of care.</p>
+                            
+                            <p>For the other, however… she slowly became more than a thought, more than a moment — she became a constant 🌙 Not suddenly. Not loudly. Just deeply.</p>
+                            
+                            <p>What started as a joke never remained a joke 🪄 There were playful cold wars ❄️🔥, moments of silence 🤫 that spoke more than words, small distances, invisible walls… and then, without understanding how — everything would feel peaceful again 🌊</p>
+                            
+                            <p>People around them had questions 🤔 But the story never gave answers. Maybe she was important… or maybe she was only a reason — not the destination.</p>
+                            
+                            <p>Because what truly grew between those two friends had nothing to do with explanations… and everything to do with trust 💞</p>
+                            
+                            <p>And today, when time has folded all those scattered moments together ⏳, they no longer stand on opposite sides of the story. They now stand in the same place — not as doubts, not as chapters — but as family 👨‍👩‍👧‍👦</p>
+                            
+                            <p>That is the quiet magic of destiny ✨ It never explains itself — it simply arrives… beautifully.</p>
+                            
+                            <hr class="letter-divider">
+                            
+                            <p><strong>Now, coming to you Ammu Kutti 💖</strong></p>
+                            
+                            <p>Sometimes I don't even trust myself 😔, yet you trust me completely 🫶 I still don't understand how that happens — but I feel unbelievably lucky 💎</p>
+                            
+                            <p>You share your thoughts 🧠, your fears 😟, your dreams ✨ and your happiness 😊 without hesitation. Even when I disappear into my busy world 🏃‍♂️💼, you understand. When the world stands against me 🌍❌ — you stand for me 💪💞</p>
+                            
+                            <p>For that… "thank you" is too small a word 🥺</p>
+                            
+                            <p>You are always special to me 🌹 And at the same time, I never want to bring trouble to you or anyone because of me 🙏 If I ever seem distant, it is not my heart — it is only responsibility speaking.</p>
+                            
+                            <p>I don't know if I truly deserve your love 💝, care 🤗, support 🌈 and priority… But I promise you this — you will always be my favourite ⭐, my respect 🙇‍♂️, my pride 👑</p>
+                            
+                            <p>You may feel that you don't know me fully… but your belief in me 🙏 is something I silently carry in my heart every day 💓</p>
+                            
+                            <hr class="letter-divider">
+                            
+                            <p><em>And now, two lines I dedicate only to you 🌙☀️</em></p>
+                            
+                            <div class="kannada-quote">
+                                <p>"ಚಂದ್ರನನ್ನ ನಿಮಗೆ ತಂದುಕೊಡಲಾರದೆ ಇರಬಹುದು 🌙,<br>
+                                ಆದರೆ ಸೂರ್ಯನಂತೆ ಯಾವಾಗಲೂ ನಿಮ್ಮ ಜೊತೆಯಲ್ಲೇ ಇರ್ತೀನಿ ☀️.<br>
+                                ಕೆಲವೊಮ್ಮೆ ನಕ್ಷತ್ರಗಳ ನಡುವೆ ನೀವು ಮಿನುಗೋದಕ್ಕೆ ದೂರ ಇರ್ತೀನಿ ✨,<br>
+                                ಆದರೆ ಪ್ರಾಬ್ಲಂ ಬಂದಾಗ Twilight ತರ ನಿಮ್ಮ ಜೊತೆಗೆ ನಿಲ್ಲ್ತೀನಿ 🌄."</p>
+                            </div>
+                            
+                            <p><em>I may not bring you the moon 🌙, but I will stay with you like the sun ☀️ — always. Even if I step back to let you shine among the stars ✨, when darkness comes 🌌, I will stand with you like twilight 🌄</em></p>
+                            
+                            <hr class="letter-divider">
+                            
+                            <p>Once again, many more happy returns of the day 🎂🎉, my dear sister 💖<br>
+                            Have a beautiful, memorable life 🌸🌈</p>
+                            
+                            <p>Take care 🤍<br>
+                            You are always in my prayers 🙏✨</p>
+                            
+                            <div class="letter-signature">
+                                <p>Forever your little brother,</p>
+                                <p class="signature">Karna 💞🫶</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <audio id="bgMusic" preload="auto" loop>
+        <source src="assets/music/memory.mp3" type="audio/mpeg">
+    </audio>
+    
+    <button id="musicToggle" class="music-toggle-btn" aria-label="Toggle music" style="display: none;">
+        <span id="musicIcon">🎵</span>
+    </button>
+    
+    <script src="js/typewriter.js"></script>
+    <script src="js/memories.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Memory Light Tree</title>
+  <link rel="stylesheet" href="memoryTree.css" />
+</head>
+<body>
+  <noscript>
+    <div class="noscript">This scene needs JavaScript enabled.</div>
+  </noscript>
+
+  <main class="scene" id="scene" aria-label="Memory Light Tree scene">
+    <div class="sky" aria-hidden="true">
+      <div class="stars" id="stars"></div>
+      <div class="mist"></div>
+      <div class="moon"></div>
+    </div>
+
+    <section class="tree-stage" aria-label="Glowing memory tree">
+      <div class="tree-wrap" id="treeWrap">
+        <!-- Tree silhouette + pulsing lights (pure SVG, works offline) -->
+        <svg class="tree" viewBox="0 0 900 900" role="img" aria-label="A glowing tree with warm lights" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <linearGradient id="trunkGrad" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0" stop-color="#2b1a12" />
+              <stop offset="1" stop-color="#140b08" />
+            </linearGradient>
+            <radialGradient id="canopyGrad" cx="50%" cy="35%" r="70%">
+              <stop offset="0" stop-color="#0e1620" stop-opacity="0.9" />
+              <stop offset="1" stop-color="#060a10" stop-opacity="0.95" />
+            </radialGradient>
+            <filter id="softGlow" x="-40%" y="-40%" width="180%" height="180%">
+              <feGaussianBlur stdDeviation="6" result="b" />
+              <feColorMatrix in="b" type="matrix"
+                values="1 0 0 0 0
+                        0 1 0 0 0
+                        0 0 1 0 0
+                        0 0 0 0.75 0" result="g" />
+              <feMerge>
+                <feMergeNode in="g" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+
+          <!-- Canopy shadow -->
+          <path d="M160 410 C190 250, 350 150, 460 165 C610 115, 760 220, 770 380 C845 420, 840 545, 760 585 C700 710, 520 745, 420 710 C330 750, 210 700, 200 610 C120 565, 110 450, 160 410 Z"
+            fill="url(#canopyGrad)" opacity="0.95" />
+
+          <!-- Branches -->
+          <path class="branch" d="M440 720 C420 650, 425 585, 450 525 C470 470, 510 430, 560 405" />
+          <path class="branch" d="M450 700 C410 650, 370 610, 330 570 C295 535, 270 500, 250 460" />
+          <path class="branch" d="M470 670 C510 610, 560 565, 620 545 C675 525, 720 505, 760 470" />
+          <path class="branch" d="M435 640 C400 580, 365 535, 330 500 C305 475, 285 450, 270 420" />
+          <path class="branch" d="M480 625 C525 570, 565 530, 610 505 C650 485, 690 460, 720 430" />
+
+          <!-- Trunk -->
+          <path d="M420 840 C390 765, 400 690, 415 630 C430 575, 430 520, 410 470 C395 430, 395 395, 410 360 C430 315, 470 315, 495 350 C530 400, 515 455, 490 500 C465 545, 465 585, 485 635 C505 695, 515 765, 485 840 Z"
+            fill="url(#trunkGrad)" />
+
+          <!-- Root fade -->
+          <ellipse cx="455" cy="850" rx="240" ry="55" fill="#04060a" opacity="0.75" />
+
+          <!-- Warm fairy lights -->
+          <g class="lights" filter="url(#softGlow)">
+            <circle class="light gold" cx="310" cy="520" r="8" />
+            <circle class="light gold" cx="360" cy="485" r="7" />
+            <circle class="light red"  cx="410" cy="455" r="6" />
+            <circle class="light gold" cx="465" cy="435" r="7" />
+            <circle class="light gold" cx="520" cy="450" r="6" />
+            <circle class="light red"  cx="585" cy="470" r="7" />
+            <circle class="light gold" cx="645" cy="500" r="7" />
+
+            <circle class="light red"  cx="275" cy="460" r="6" />
+            <circle class="light gold" cx="235" cy="420" r="7" />
+            <circle class="light gold" cx="290" cy="395" r="6" />
+
+            <circle class="light gold" cx="705" cy="445" r="7" />
+            <circle class="light red"  cx="745" cy="480" r="6" />
+            <circle class="light gold" cx="675" cy="410" r="6" />
+
+            <circle class="light red"  cx="410" cy="605" r="7" />
+            <circle class="light gold" cx="490" cy="590" r="7" />
+            <circle class="light gold" cx="560" cy="565" r="6" />
+            <circle class="light red"  cx="340" cy="585" r="6" />
+            <circle class="light gold" cx="615" cy="535" r="7" />
+          </g>
+        </svg>
+
+        <!-- Orbs (photos) live here -->
+        <div class="orbs-layer" id="orbsLayer" aria-label="Memory orbs"></div>
+      </div>
+
+      <div class="ui">
+        <div class="title">
+          <h1>Memory Light Tree</h1>
+          <p>Hover the lights… click to open a memory.</p>
+        </div>
+
+        <button class="music-toggle" id="musicToggle" type="button" aria-pressed="false">
+          <span class="music-dot" aria-hidden="true"></span>
+          <span class="music-label" id="musicLabel">Tap to play music</span>
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal -->
+  <div class="modal hidden" id="modal" role="dialog" aria-modal="true" aria-label="Memory viewer">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-card" role="document">
+      <button class="modal-close" id="modalClose" type="button" aria-label="Close">×</button>
+      <img class="modal-img" id="modalImg" alt="Selected memory" />
+      <p class="modal-caption" id="modalCaption"></p>
+    </div>
+  </div>
+
+  <!-- Background music (offline: put a file at assets/music/memory.mp3) -->
+  <audio id="bgMusic" preload="auto" loop>
+    <source src="assets/music/memory.mp3" type="audio/mpeg" />
+  </audio>
+
+  <script src="memoryTree.js"></script>
+</body>
+</html>
